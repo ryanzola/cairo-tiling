@@ -9,6 +9,8 @@ export default class Canvas {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.config = this.experience.config;
+    this.time = this.experience.time;
+    this.mouse = this.experience.mouse.instance;
 
     this.setGeometry();
     this.setMaterial();
@@ -16,13 +18,18 @@ export default class Canvas {
   }
 
   setGeometry() {
-    this.geometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+    this.geometry = new THREE.PlaneGeometry(2, 2, 1, 1);
   }
 
   setMaterial() {
     this.material = new THREE.ShaderMaterial({
       vertexShader: vertex,
       fragmentShader: fragment,
+      uniforms: {
+        u_mouse: { value: new THREE.Vector2() },
+        u_resolution: { value: new THREE.Vector2() },
+        u_time: { value: 0 },
+      }
     });
   }
 
@@ -31,5 +38,16 @@ export default class Canvas {
     this.scene.add(this.mesh);
   }
 
-  update() {}
+  update() {
+    // mouse position
+    this.material.uniforms.u_mouse.value.x = this.mouse.x;
+    this.material.uniforms.u_mouse.value.y = this.mouse.y;
+
+    // resolution
+    this.material.uniforms.u_resolution.value.x = this.config.width;
+    this.material.uniforms.u_resolution.value.y = this.config.height;
+
+    // time
+    this.material.uniforms.u_time.value += this.time.delta * 0.0005;
+  }
 }

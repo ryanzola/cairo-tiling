@@ -4,6 +4,7 @@ import GUI from "lil-gui";
 import Time from "./Utils/Time.js";
 import Sizes from "./Utils/Sizes.js";
 import Stats from "./Utils/Stats.js";
+import Mouse from "./Utils/Mouse.js";
 
 import Resources from "./Resources.js";
 import Renderer from "./Renderer.js";
@@ -37,6 +38,7 @@ export default class Experience {
     this.setScene();
     this.setCamera();
     this.setRenderer();
+    this.setMouse();
     this.setResources();
     this.setWorld();
 
@@ -86,6 +88,10 @@ export default class Experience {
     this.renderer = new Renderer({ rendererInstance: this.rendererInstance });
 
     this.targetElement.appendChild(this.renderer.instance.domElement);
+  }
+
+  setMouse() {
+    this.mouse = new Mouse();
   }
 
   setResources() {

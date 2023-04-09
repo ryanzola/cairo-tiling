@@ -1,5 +1,5 @@
 {
-  "name": "Template Complex",
+  "name": "Cairo Tiling",
   "dockerFile": "Dockerfile",
   "appPort": 3000,
   "runArgs": ["-u", "node"],
@@ -11,9 +11,10 @@
       },
       "extensions": [
         "poimandres.poimandres",
-        "slevesque.shader"
+        "slevesque.shader",
+        "GitHub.copilot"
       ]
     }
   },
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "npm install"
 }
